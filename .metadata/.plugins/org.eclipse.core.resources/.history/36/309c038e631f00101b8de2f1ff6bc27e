@@ -1,0 +1,14 @@
+package AbstractClasses;
+
+public class Abstract {
+	
+	abstract class AbstractDemo{
+		abstract void add();
+		abstract void sub();
+		
+	}
+	public static void main(String[] args) {
+		System.out.println("It is an abstract class");
+		
+	}
+}

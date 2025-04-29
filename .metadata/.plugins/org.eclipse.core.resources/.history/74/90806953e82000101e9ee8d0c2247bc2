@@ -1,0 +1,26 @@
+package Multithreading;
+
+class ATM{
+	int balance=10000;
+	public void checkBalanc(String name) {
+		System.out.println("The balance of "+name+" = "+balance);
+	}
+	public void Withdraw(int amount , String name) {
+		balance-=amount;
+		System.out.println(name + "is withdrawing "+ amount);
+		System.out.print("Remaining balance = "+balance);
+	}
+}
+
+class Customer extends Thread{
+	ATM atm;
+	
+	
+}
+public class AtmPractice {
+
+	
+	public static void main(String[] args) {
+		
+	}
+}

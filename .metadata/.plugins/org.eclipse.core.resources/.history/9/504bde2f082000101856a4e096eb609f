@@ -1,0 +1,13 @@
+package practice;
+
+public class Practice1 {
+	int a;
+	int b;
+	void sum() {
+		System.out.println(a+b);
+	}
+	public static void main(String[] args) {
+		
+	}
+	
+}

@@ -1,0 +1,9 @@
+package InterfacePractice;
+
+import InterfacePractice.Bird.Parrot;
+
+public class Starter {
+	public static void main(String[] args) {
+		Parrot p1= new Parrot();
+	}
+}

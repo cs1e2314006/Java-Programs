@@ -1,0 +1,14 @@
+package practice;
+
+public class practice2 {
+public static void main(String[] args) {
+	Practice1 obPractice1=new Practice1();
+//	obPractice1.a=20;
+//	obPractice1.set(30);
+	int a=obPractice1.get();
+	
+	System.out.println(a);
+	System.out.println(obPractice1.b);
+//	obPractice1.b=30;
+}
+}

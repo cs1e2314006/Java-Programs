@@ -1,0 +1,7 @@
+package Interfacedemo1;
+
+interface Interval {
+	void methodx();
+	void methody();
+
+}

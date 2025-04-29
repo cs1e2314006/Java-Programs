@@ -1,0 +1,14 @@
+package InterfacePractice;
+
+public class Bird {
+	class Parrot extends Bird{
+		
+	}
+	class Eagle extends Bird{
+		
+	}
+	class Ostrich extends Bird{
+		
+	}
+	
+}

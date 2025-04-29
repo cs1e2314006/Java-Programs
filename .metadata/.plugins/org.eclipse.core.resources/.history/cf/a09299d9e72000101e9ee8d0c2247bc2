@@ -1,0 +1,13 @@
+package InterfacePractice;
+
+public class Insect {
+	class Hbee extends Insect{
+		
+	}
+	class DragonFly extends Insect{
+		
+	}
+	class Ant extends Insect{
+		
+	}
+}

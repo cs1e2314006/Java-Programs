@@ -1,0 +1,20 @@
+package Multithreading;
+
+public class Multi1 {
+	class My implements Runnable{
+		public void run() {
+			while (true)
+			System.out.println("Hello");
+		}
+	}
+	public static void main(String[] args) {
+//		My m1= new My();
+		Multi1 multi1= new Multi1();
+		Multi1.My myobj= multi1.new My();
+		Thread t1= new Thread(myobj);
+		while(true)
+			System.out.print("World");
+		
+		
+	}
+}

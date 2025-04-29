@@ -1,0 +1,33 @@
+package Multithreading;
+
+class MyDatas{
+	int value;
+	
+	void set(int value) {
+		this.value=value;
+	}
+	int get() {
+		
+		return this.value;
+		
+	}
+}
+
+class Producer extends Thread{
+	MyDatas data;
+	int count=0;
+	public Producer(MyDatas d1) {
+		data=d1;
+	}
+	public void run() {
+		data.set(count);
+		count++;
+	}
+	
+}
+
+public class InterProcess{
+	public static void main(String[] args) {
+		
+	}
+}

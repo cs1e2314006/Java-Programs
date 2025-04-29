@@ -1,0 +1,13 @@
+package InterfacePractice;
+
+public class Vehicle {
+	class Aeroplane extends Vehicle{
+		
+	}
+	class Helicopter extends Vehicle{
+		
+	}
+	class Car extends Vehicle{
+			
+	}
+}
