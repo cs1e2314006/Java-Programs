@@ -1,0 +1,19 @@
+package CollectionFrameWork;
+
+import java.util.StringTokenizer;
+
+
+// these are used to separate out required data from the file or a string 
+// if a file consist of key value pair and we want to get the items only instead of all the 
+// pairs in the form of a=b we can use string tokenizer
+// it is kinda same as split fn in python which takes a separator for separating values
+public class StringTokenizersDemo {
+	public static void main(String[] args) {
+		// simple example
+		String s1="faizan=19;arsalaan=20;safi=21";
+		StringTokenizer s2=new StringTokenizer(s1,"=;");// the second argument take the separator
+		// here more than one separator can be there
+		while(S2.hasMoreElements)
+		
+	}
+}

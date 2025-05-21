@@ -1,0 +1,3 @@
+My name is faizan
+This is file 2
+method 3

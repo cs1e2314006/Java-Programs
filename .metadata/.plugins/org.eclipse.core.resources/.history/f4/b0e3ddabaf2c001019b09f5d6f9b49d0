@@ -1,0 +1,12 @@
+package NetworkProgramming;
+
+import java.net.Socket;
+
+public class Client {
+
+	public static void main(String[] args) throws Exception{
+		Socket clientSocket=new Socket("localhost",2000);
+		clientSocketi
+	}
+
+}

@@ -9,5 +9,4 @@ public abstract class Main {
 	void method6() {
 		System.out.println("It is method 6");
 	}
-
 }

@@ -1,8 +1,0 @@
-package InterfacePractice;
-
-public class Starter {
-	public static void main(String[] args) {
-		Parrot p1= new Parrot();
-		System.out.println(p1);
-	}
-}

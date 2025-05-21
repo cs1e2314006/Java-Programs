@@ -1,0 +1,78 @@
+package NetworkProgramming;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.*;
+
+public class MultiThreadedEcho extends Thread {
+    Socket clientSocket;
+    // constructor
+    MultiThreadedEcho(Socket clientSocket){
+        this.clientSocket=clientSocket;
+       
+    }
+    // we have kept this list static because any thread can access it and read the previous messages by other client
+    // and synchronized because there can be more than one thread that are fetching it or writing on it
+    // so to keep it thread safe we make it synchronized
+    static List<String>AllMessages=Collections.synchronizedList(new ArrayList<>());
+    // for printing old messages as soon as the thread starts because it is being called by the lines of code which is inside
+    // the run method
+     static void printMessage(Socket clientSocket) {
+        try {
+            PrintStream ps = new PrintStream(clientSocket.getOutputStream());
+            ps.println("----- Previous Messages -----");
+            // this will write all the previous message that was being stored in arraylist to client's server
+            if (AllMessages.size()>0){
+                synchronized (AllMessages) {
+                for (String msg : AllMessages) {
+                    System.out.println(msg);
+                    ps.println(msg);
+                }
+            }
+            }
+            ps.println("----- End of History -----");
+        } catch (Exception e) {
+            System.out.println("Error sending history: " + e.getMessage());
+        }
+    }
+    //iykyk
+    public void run(){
+       try{
+         // for reading the data from client we need a buffer reader which is a character reader basically used for reading string (input from client)
+		BufferedReader br=new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+		// for giving output to client we need a print stream which can easily write string to stream
+		PrintStream ps=new PrintStream(clientSocket.getOutputStream());
+        // printing old messages to newly joined client
+        printMessage(clientSocket); 
+		String msgString;
+		do {
+			msgString=br.readLine();// reading from client through buffer
+            System.out.println(msgString);
+			ps.println("readed by server "+msgString);// writing to client side
+            synchronized(AllMessages){
+                AllMessages.add(msgString);
+            }
+
+		}while(!msgString.equals("end"));
+		clientSocket.close(); 
+       }catch(Exception e){System.out.println("an error occured");}
+    }
+    @SuppressWarnings("resource")
+    public static void main(String[] args) throws Exception {
+        ServerSocket server=new ServerSocket(2000);
+		Socket stkSocket;// accepting the client socket request
+        MultiThreadedEcho runner;
+        int clientcount=0;
+        do {
+            stkSocket=server.accept();
+            System.out.println("Client connected: "+ ++clientcount);
+            runner=new MultiThreadedEcho(stkSocket);
+            runner.start();
+
+        } while (true);
+    }
+}
+

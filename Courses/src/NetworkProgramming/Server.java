@@ -1,0 +1,27 @@
+package NetworkProgramming;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Server {
+	public static void main(String[] args) throws Exception {
+		ServerSocket server=new ServerSocket(2000);
+		Socket stkSocket=server.accept();// accepting the client socket request
+
+		// for reading the data from client we need a buffer reader which is a character reader
+		//basically used for reading string (input from client)
+		BufferedReader br=new BufferedReader(new InputStreamReader(stkSocket.getInputStream()));
+		// for giving output to client we need a print stream which can easily write string to stream
+		PrintStream ps=new PrintStream(stkSocket.getOutputStream());
+		String msgString;
+		do {
+			msgString=br.readLine();// reading from client through buffer
+            System.out.println(msgString);
+			ps.println("readed by server "+msgString);
+		}while(msgString!="end");
+		server.close();
+	}
+}

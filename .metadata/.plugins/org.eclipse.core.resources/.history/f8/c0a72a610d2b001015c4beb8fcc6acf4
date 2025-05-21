@@ -1,0 +1,66 @@
+package CollectionFrameWork;
+
+//Java program to show the use of List Interface
+import java.util.*;
+
+class ListInterface {
+
+ public static void main(String[] args)
+ {
+
+     // Creating a List of Strings using ArrayList
+     List<Object> li = new ArrayList<>();
+     List<Integer> in=new ArrayList<>();
+     List<Object> l2=new ArrayList<Object>(List.of(12,13,"faizan"));
+     // Adding elements in List
+     li.add("Java");
+     li.add("Python");
+     li.add("DSA");
+     li.add("C++");
+     in.add(1);
+     in.add(2);
+     in.add(3);
+     li.addAll(in);
+     li.addAll(3, l2);
+
+     System.out.println("Elements of List are:");
+
+     // Iterating through the list
+     for (Object s : li) {
+         System.out.println(s);
+     }
+
+     // Accessing elements
+     System.out.println("Element at Index 1: "+ li.get(1));
+
+     // Updating elements
+     li.set(1, "JavaScript");
+     System.out.println("Updated List: " + li);
+
+     // Removing elements
+     li.remove("C++");
+     System.out.println("List After Removing Element: " + li);
+     // checking if element exist or not
+     boolean check=li.contains("JavaScript");
+     System.out.println(check);
+     // find index
+     System.out.println("the index of JavaScript= "+li.indexOf("JavaScript"));
+     // another way of accessing
+     for(int i=0; i<li.size();i++)
+     {
+    	 System.out.print(li.get(i)+" ");
+     }
+     System.out.println();
+     // accessing using itertor
+     Iterator<Integer>iterator=in.iterator();
+     
+     	while (iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}
+     ListIterator<Object> iterator2=li.listIterator(li.size());
+     
+     // for clearing the whole list 
+     li.clear();
+    
+ }
+}

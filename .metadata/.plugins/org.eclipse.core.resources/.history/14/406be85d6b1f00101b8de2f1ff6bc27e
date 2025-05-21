@@ -1,8 +1,0 @@
-package AbstractClasses;
-
-abstract class SecondClass extends Main{
-	
-	void method2() {
-		System.out.println("Method2 from FirstClass");}
-}
-

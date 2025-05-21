@@ -1,0 +1,21 @@
+package CollectionFrameWork;
+
+import java.util.LinkedHashMap;
+
+
+public class LinkHash {
+	public static void main(String[] args) {
+		// this store the value based on their insertion order
+		LinkedHashMap<Integer, Integer> lhm=new LinkedHashMap<Integer, Integer>();
+		lhm.put(10, 10);
+		lhm.put(20, 20);
+		lhm.put(30, 30);
+		lhm.put(40, 40);
+		lhm.put(50, 10);
+		lhm.put(60, 70);
+		// if you want to store the values based on their access order then
+		LinkedHashMap<Integer, Integer> lhm2=new LinkedHashMap<Integer, Integer>(5,.75f,true);
+		// here three parameters are size,loadfactor or capacity factor,access order
+		System.out.println(lhm);
+	}
+}

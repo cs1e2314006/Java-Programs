@@ -1,0 +1,21 @@
+package CollectionFrameWork;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+// this collection is used to store the key value pair in other file
+// it is a type of hash map but with some extra features like saving directly to file or retreving it
+//this store data in the form of strings only
+public class ProPerties {
+	public static void main(String[] args) throws Exception {
+		Properties p1=new Properties();
+		p1.put("faizan", "PSIT");
+		p1.put("alex", "kIT");
+		p1.put("bob", "IIT");
+//		System.out.println(p1);
+		p1.store(new FileOutputStream("data.txt"),"it is data");
+		
+	}
+}

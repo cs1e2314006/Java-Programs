@@ -1,0 +1,91 @@
+package NetworkProgramming;
+
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.*;
+
+public class MultiThreadedEcho extends Thread {
+    private static List<String> allMessages = Collections.synchronizedList(new ArrayList<>());
+    private static List<PrintStream> clientOutputStreams = Collections.synchronizedList(new ArrayList<>());
+
+    private Socket clientSocket;
+    private PrintStream clientOut;
+
+    MultiThreadedEcho(Socket clientSocket) throws IOException {
+        this.clientSocket = clientSocket;
+        this.clientOut = new PrintStream(clientSocket.getOutputStream());
+        clientOutputStreams.add(clientOut); // Store client's output stream for broadcasting
+
+        // Send previous chat history to new client
+        printMessageHistory();
+    }
+
+    private void printMessageHistory() {
+        try {
+            clientOut.println("----- Previous Messages -----");
+            synchronized (allMessages) {
+                for (String msg : allMessages) {
+                    clientOut.println(msg);
+                }
+            }
+            clientOut.println("----- End of History -----");
+        } catch (Exception e) {
+            System.out.println("Error sending chat history: " + e.getMessage());
+        }
+    }
+
+    private static void broadcast(String message) {
+        synchronized (clientOutputStreams) {
+            for (PrintStream ps : clientOutputStreams) {
+                ps.println(message);
+            }
+        }
+    }
+
+    public void run() {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            String msgString;
+            do {
+                msgString = br.readLine();
+                if (msgString == null) break; // In case client closes unexpectedly
+                System.out.println("Received: " + msgString);
+                String toSend = "Client: " + msgString;
+                broadcast(toSend);
+                allMessages.add(toSend);
+            } while (!msgString.equals("end"));
+
+            clientSocket.close();
+            clientOutputStreams.remove(clientOut); // Remove on disconnect
+
+        } catch (Exception e) {
+            System.out.println("Client disconnected or error: " + e.getMessage());
+            clientOutputStreams.remove(clientOut); // Remove faulty connection
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        ServerSocket server = new ServerSocket(2000);
+        System.out.println("Server started on port 2000");
+
+        // Thread for server to broadcast messages manually
+        new Thread(() -> {
+            Scanner scanner = new Scanner(System.in);
+            while (true) {
+                String serverMsg = scanner.nextLine();
+                String toSend = "Server: " + serverMsg;
+                broadcast(toSend);
+                allMessages.add(toSend);
+            }
+        }).start();
+
+        int clientCount = 0;
+        while (true) {
+            Socket stkSocket = server.accept();
+            System.out.println("Client connected: " + (++clientCount));
+            new MultiThreadedEcho(stkSocket).start();
+        }
+    }
+}
+

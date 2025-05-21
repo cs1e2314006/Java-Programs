@@ -1,7 +1,0 @@
-package AbstractClasses;
-
-public class Abstract {
-	public static void main(String[] args) {
-		System.out.println("It is an abstract class");
-	}
-}
